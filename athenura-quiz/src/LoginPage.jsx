@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-// ─── Inline SVG: Shield / Logo Icon ───────────────────────────────────────────
+// ─── Inline SVG: Shield / Logo IconS ───────────────────────────────────────────
 const ShieldIcon = () => (
   <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
     <path
