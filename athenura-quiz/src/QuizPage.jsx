@@ -183,6 +183,7 @@ export default function QuizPage() {
   const notAnsweredCount = TOTAL - answeredCount;
   const markedCount = marked.filter(Boolean).length;
   const progressPct = Math.round(((current + 1) / TOTAL) * 100);
+  const isLastQuestionAnswered = answers[TOTAL - 1] !== null;
 
   // ── Result ───────────────────────────────────────────────────────────────────
   const correctCount = answers.filter((a, i) => a === QUESTIONS[i].ans).length;
@@ -378,14 +379,19 @@ export default function QuizPage() {
 
               {/* Always visible Submit button */}
               <button
-                onClick={() => setShowModal(true)}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-900 text-white text-sm font-bold hover:bg-sky-800 transition-all"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7.5L5.5 10.5L11.5 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                Submit Quiz
-              </button>
+  onClick={() => setShowModal(true)}
+  disabled={!isLastQuestionAnswered}
+  className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all
+    ${isLastQuestionAnswered
+      ? "bg-sky-900 text-white hover:bg-sky-800"
+      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+    }`}
+>
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path d="M2.5 7.5L5.5 10.5L11.5 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+  Submit Quiz
+</button>
 
               {current < TOTAL - 1 ? (
                 <button
